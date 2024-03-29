@@ -33,6 +33,12 @@
     <ClCompile Include="lve_device.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="lve_swap_chain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_model.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lve_window.h">
@@ -46,6 +52,12 @@
     </ClInclude>
     <ClInclude Include="lve_device.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_swap_chain.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_model.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
