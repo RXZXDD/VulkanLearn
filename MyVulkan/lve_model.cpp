@@ -27,7 +27,7 @@ namespace lve {
 	}
 	void LveModel::createVertexBuffers(const std::vector<Vertex>& vertices)
 	{
-		vertexCount = static_cast<uint32_t>(vertices.size()) +1;
+		vertexCount = static_cast<uint32_t>(vertices.size()) ;
 		assert(vertexCount >= 3 && "at least 3 Vertex");
 		VkDeviceSize bufferSize = sizeof(vertices[0]) * vertexCount;
 		lveDevice.createBuffer(bufferSize, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
@@ -47,6 +47,7 @@ namespace lve {
 
 	std::vector<VkVertexInputAttributeDescription> LveModel::Vertex::getAttributeDescriptions()
 	{
-		return { {0, 0, VK_FORMAT_R32G32B32_SFLOAT, 0} };
+		return { {0, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, position)},
+				{1, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, color)}};
 	}
 }
