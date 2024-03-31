@@ -29,12 +29,13 @@ namespace lve{
 		void createPipeline();
 		void createCommandBuffers();
 		void drawFrame();
-
+		void recreateSwapChain();
+		void recordCommandBuffer(int imageIndex);
 
 
 		LveWindow lveWindow{ WIDTH, HEIGHT, "fuck" };
 		LveDevice lveDevice{ lveWindow };
-		LveSwapChain lveSwapChain{lveDevice, lveWindow.getExtent()};
+		std::unique_ptr<LveSwapChain> lveSwapChain;
 		/*LvePipeline lvePipeline{ lveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv" , LvePipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};*/
 
 		std::unique_ptr<LvePipeline> lvePipeline;
