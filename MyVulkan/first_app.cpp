@@ -109,6 +109,17 @@ namespace lve {
 			}
 		}
 	}
+	void FirstApp::freeCommandBuffers()
+	{
+		vkFreeCommandBuffers(
+			lveDevice.device(),
+			lveDevice.getCommandPool(),
+			static_cast<uint32_t>(commandBuffers.size()),
+			commandBuffers.data());
+
+		commandBuffers.clear();
+	}
+
 	void FirstApp::drawFrame()
 	{
 
@@ -151,9 +162,14 @@ namespace lve {
 			lveSwapChain = std::make_unique<LveSwapChain>(lveDevice, extend);
 		}
 		else {
-			lveSwapChain.reset();
-			lveSwapChain = std::make_unique<LveSwapChain>(lveDevice, extend);
+			//lveSwapChain.reset();
+			//lveSwapChain = std::make_unique<LveSwapChain>(lveDevice, extend);
+			lveSwapChain = std::make_unique<LveSwapChain>(lveDevice, extend, std::move(lveSwapChain));
 
+			if (lveSwapChain->imageCount() != commandBuffers.size()) {
+				freeCommandBuffers();
+				createCommandBuffers();
+			}
 		}
 		
 		createPipeline();
