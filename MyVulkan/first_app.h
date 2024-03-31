@@ -8,6 +8,7 @@
 
 #include <memory>
 #include <vector>
+#include "lve_game_object.h"
 
 namespace lve{
 	class FirstApp {
@@ -24,7 +25,8 @@ namespace lve{
 		void run();
 
 	private:
-		void loadModel();
+		//void loadModel();
+		void loadGameObject();
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
@@ -32,7 +34,7 @@ namespace lve{
 		void drawFrame();
 		void recreateSwapChain();
 		void recordCommandBuffer(int imageIndex);
-
+		void renderGameObjects(VkCommandBuffer commandBuffer);
 
 		LveWindow lveWindow{ WIDTH, HEIGHT, "fuck" };
 		LveDevice lveDevice{ lveWindow };
@@ -43,6 +45,7 @@ namespace lve{
 		VkPipelineLayout pipelineLayout;
 		std::vector<VkCommandBuffer> commandBuffers;
 
-		std::unique_ptr<LveModel> lveModel;
+		//std::unique_ptr<LveModel> lveModel;
+		std::vector<LveGameObject> gameObject;
 };
 }
