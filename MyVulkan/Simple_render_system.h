@@ -5,6 +5,7 @@
 #include "lve_swap_chain.h"
 #include "lve_model.h"
 #include "lve_game_object.h"
+#include "lve_camera.h"
 
 #include <memory>
 #include <vector>
@@ -19,7 +20,7 @@ namespace lve {
 		SimpleRenderSystem(const SimpleRenderSystem&) = delete;
 		SimpleRenderSystem& operator=(const SimpleRenderSystem&) = delete;
 
-		void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<LveGameObject> &gameObjects);
+		void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<LveGameObject> &gameObjects, const LveCamera& camera);
 
 	private:
 		//void loadModel();
