@@ -108,7 +108,7 @@ namespace lve {
             });
         auto cube = LveGameObject::createGameObject();
         cube.model = lveModel;
-        cube.color = { 1.f, .1f, 1.f };
+        //cube.color = { 1.f, .1f, 1.f };
         cube.transform.translation = { .0f, .0f, .5f };
         cube.transform.scale = { .5f, .5f, .5f };
         gameObjects.push_back(std::move(cube));
