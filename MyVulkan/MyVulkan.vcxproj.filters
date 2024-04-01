@@ -89,6 +89,9 @@
     <ClInclude Include="keyboard_movement_controller.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="lve_utils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="compile.bat">
