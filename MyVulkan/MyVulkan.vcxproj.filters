@@ -54,6 +54,12 @@
     <ClCompile Include="keyboard_movement_controller.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="lve_buffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_descriptor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lve_window.h">
@@ -90,6 +96,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="lve_utils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_frame_info.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_descriptor.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

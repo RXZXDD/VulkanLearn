@@ -10,7 +10,7 @@ struct TransformComponent {
 	glm::vec3 scale{ 1.f, 1.f, 1.f };
 	glm::vec3 rotation{};
 
-    glm::mat4 mat4() {
+    glm::mat4 mat4();/* {
         const float c3 = glm::cos(rotation.z);
         const float s3 = glm::sin(rotation.z);
         const float c2 = glm::cos(rotation.x);
@@ -37,7 +37,8 @@ struct TransformComponent {
                 0.0f,
             },
             {translation.x, translation.y, translation.z, 1.0f} };
-    }
+    }*/
+    glm::mat3 normalMatrix();
 };
 
 namespace lve {
