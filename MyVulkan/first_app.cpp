@@ -132,7 +132,7 @@ namespace lve {
               /*  globalUboBuffer.writeToIndex(&ubo, frameIndex);
                 globalUboBuffer.flushIndex(frameIndex);*/
 
-                uboBuffers[frameIndex]->writeToBuffer(&ubo);
+                uboBuffers[frameIndex]->writeToBuffer(&ubo); 
                
 
                 uboBuffers[frameIndex]->flush();

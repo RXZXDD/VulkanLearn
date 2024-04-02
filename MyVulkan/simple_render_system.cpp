@@ -59,17 +59,28 @@ namespace lve {
 		LvePipeline::defaultPipelineConfigInfo(pipelineConfig);
 		pipelineConfig.renderPass = renderPass;
 		pipelineConfig.pipelineLayout = pipelineLayout;
-		lvePipeline = std::make_unique<LvePipeline>(lveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", pipelineConfig);
+		lvePipelines["basePipeline"] = std::make_unique<LvePipeline>(lveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", pipelineConfig);
+		lvePipelines["myPipeline"] = std::make_unique<LvePipeline>(lveDevice, "shaders/myShader.vert.spv", "shaders/myShader.frag.spv", pipelineConfig);
 	}
 
 	void SimpleRenderSystem::renderGameObjects(FrameInfo& frameInfo, std::vector<LveGameObject>& gameObjects)
 	{
-		lvePipeline->bind(frameInfo.commandBuffer);
+		//lvePipeline->bind(frameInfo.commandBuffer);
 
 		auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView();
 
 		for (auto& obj : gameObjects) {
 			
+			if ((rand() % 10) > 1)
+			{
+				lvePipelines["basePipeline"]->bind(frameInfo.commandBuffer);
+
+			}
+			else {
+				lvePipelines["myPipeline"]->bind(frameInfo.commandBuffer);
+
+			}
+
 			vkCmdBindDescriptorSets(
 				frameInfo.commandBuffer,
 				VK_PIPELINE_BIND_POINT_GRAPHICS,

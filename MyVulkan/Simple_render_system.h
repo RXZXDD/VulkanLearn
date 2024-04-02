@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <vector>
+#include<unordered_map>
 
 namespace lve {
 	class SimpleRenderSystem {
@@ -30,7 +31,7 @@ namespace lve {
 
 		LveDevice& lveDevice;
 
-		std::unique_ptr<LvePipeline> lvePipeline;
+		std::unordered_map<std::string, std::unique_ptr<LvePipeline>> lvePipelines;
 		VkPipelineLayout pipelineLayout;
 
 	};
