@@ -1,5 +1,6 @@
 #include "first_app.h"
-#include "Simple_render_system.h"
+#include "system/Simple_render_system.h"
+#include "system/pointLight_render_system.h"
 #include "keyboard_movement_controller.h"
 #include "lve_buffer.h"
 
@@ -19,8 +20,11 @@
 namespace lve {
 
     struct GlobalUbo {
-        glm::mat4 prjectionView{ 1.f };
-        glm::vec3 lightDirection = glm::normalize(glm::vec3{1.f, -3.f, -1.f});
+        glm::mat4 prjection{ 1.f };
+        glm::mat4 view{ 1.f };
+        glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, .02f };
+        glm::vec3 lightPosition{ -1.f };
+        alignas(16) glm::vec4 lightColor{ 1.f };
     };
 
 	FirstApp::FirstApp()
@@ -69,7 +73,7 @@ namespace lve {
 
 
         auto globalSetLayout = LveDescriptorSetLayout::Builder(lveDevice)
-            .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
+            .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
             .build();
 
         std::vector<VkDescriptorSet> globalDescriptorSets(LveSwapChain::MAX_FRAMES_IN_FLIGHT);
@@ -81,17 +85,20 @@ namespace lve {
         }
 
 		SimpleRenderSystem simpleRenderSystem{ lveDevice, lveRenderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
+		PointLightSystem pointLightSystem{ lveDevice, lveRenderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
 
         LveCamera camera{};
+
       //  camera.setViewDirection(glm::vec3(0.f), glm::vec3(0.5f, 0.f, 1.f));
 
         auto viewObject = LveGameObject::createGameObject();
 
+        viewObject.transform.translation.z = -2.5f;
         KeyboardMovementController cameraController{};
 
         auto currentTime = std::chrono::high_resolution_clock::now();
 
-        auto lightDirect = glm::vec3{ -1.f, -1.f,  .0f };
+      //  auto lightDirect = glm::vec3{ -1.f, -1.f,  .0f };
 		while (!lveWindow.shouldClose())
 		{
 			glfwPollEvents();
@@ -108,7 +115,7 @@ namespace lve {
 
             float aspect = lveRenderer.getAspectRatio();
             //camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
-            camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 10.f);
+            camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 100.f);
 
 			if (auto commandBuffer = lveRenderer.beginFrame()) {
                 int frameIndex = lveRenderer.getFrameIndex();
@@ -125,10 +132,11 @@ namespace lve {
              //   lightDirect =lightDirect + glm::normalize(glm::cross(lightDirect, glm::vec3{ 0.f, 0.f, -1.f })) * 1.2f *frameTime;
                 
                 GlobalUbo ubo{};
-                ubo.prjectionView = camera.getProjection() * camera.getView() ;
+                ubo.prjection = camera.getProjection() ;
+                ubo.view =camera.getView() ;
                 
-
-                ubo.lightDirection = lightDirect;
+                
+             //   ubo.lightDirection = lightDirect;
               /*  globalUboBuffer.writeToIndex(&ubo, frameIndex);
                 globalUboBuffer.flushIndex(frameIndex);*/
 
@@ -139,6 +147,7 @@ namespace lve {
 
 				lveRenderer.beginSwapChainRenderPass(commandBuffer);
 				simpleRenderSystem.renderGameObjects(frameInfo, gameObjects);
+                pointLightSystem.render(frameInfo);
 				lveRenderer.endSwapChainRenderPass(commandBuffer);
 				lveRenderer.endFrame();
 			}
@@ -221,7 +230,7 @@ namespace lve {
         auto cube = LveGameObject::createGameObject();
         cube.model = lveModel;
         //cube.color = { 1.f, .1f, 1.f };
-        cube.transform.translation = { .0f, .0f, 2.5f };
+        cube.transform.translation = { .0f, .0f, .0f };
         cube.transform.scale = { 1.f, .5f, .5f };
         gameObjects.push_back(std::move(cube));
 
@@ -229,9 +238,17 @@ namespace lve {
         auto cube1 = LveGameObject::createGameObject();
         cube1.model = lveModel1;
         //cube.color = { 1.f, .1f, 1.f };
-        cube1.transform.translation = { 0.5f, .0f, 2.5f };
+        cube1.transform.translation = { 0.5f, .0f, .0f };
         cube1.transform.scale = { 1.f, .5f, .5f };
         gameObjects.push_back(std::move(cube1));
+
+        std::shared_ptr<LveModel> lveModel2 = LveModel::createModelFromFile(lveDevice, "models/quad.obj");
+        auto floor = LveGameObject::createGameObject();
+        floor.model = lveModel2;
+        //cube.color = { 1.f, .1f, 1.f };
+        floor.transform.translation = { 0.f, .5f, .0f };
+        floor.transform.scale = { 3.f, 1.f, 3.f };
+        gameObjects.push_back(std::move(floor));
     
     }
 }

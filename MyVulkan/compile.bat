@@ -3,4 +3,8 @@ G:\VulkanSDK\1.3.280.0\Bin\glslc.exe shaders\simple_shader.frag -o shaders\simpl
 
 G:\VulkanSDK\1.3.280.0\Bin\glslc.exe shaders\myShader.vert -o shaders\myShader.vert.spv
 G:\VulkanSDK\1.3.280.0\Bin\glslc.exe shaders\myShader.frag -o shaders\myShader.frag.spv
+
+
+G:\VulkanSDK\1.3.280.0\Bin\glslc.exe shaders\pointLight.vert -o shaders\pointLight.vert.spv
+G:\VulkanSDK\1.3.280.0\Bin\glslc.exe shaders\pointLight.frag -o shaders\pointLight.frag.spv
 pause

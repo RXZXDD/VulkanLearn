@@ -45,9 +45,6 @@
     <ClCompile Include="lve_renderer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="simple_render_system.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="lve_camera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -58,6 +55,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="lve_descriptor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="system\pointLight_render_system.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="system\simple_render_system.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,9 +89,6 @@
     <ClInclude Include="lve_renderer.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="Simple_render_system.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="lve_camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -107,6 +107,12 @@
     <ClInclude Include="lve_descriptor.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="system\pointLight_render_system.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="system\simple_render_system.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="compile.bat">
@@ -122,6 +128,12 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\myShader.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\pointLight.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\pointLight.frag">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>

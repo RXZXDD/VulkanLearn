@@ -66,20 +66,12 @@ namespace lve {
 	void SimpleRenderSystem::renderGameObjects(FrameInfo& frameInfo, std::vector<LveGameObject>& gameObjects)
 	{
 		//lvePipeline->bind(frameInfo.commandBuffer);
+		lvePipelines["basePipeline"]->bind(frameInfo.commandBuffer);
 
-		auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView();
 
 		for (auto& obj : gameObjects) {
 			
-			if ((rand() % 10) > 1)
-			{
-				lvePipelines["basePipeline"]->bind(frameInfo.commandBuffer);
 
-			}
-			else {
-				lvePipelines["myPipeline"]->bind(frameInfo.commandBuffer);
-
-			}
 
 			vkCmdBindDescriptorSets(
 				frameInfo.commandBuffer,

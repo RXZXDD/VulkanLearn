@@ -148,7 +148,8 @@
     <ClCompile Include="lve_window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="lve_device.cpp" />
-    <ClCompile Include="simple_render_system.cpp" />
+    <ClCompile Include="system\pointLight_render_system.cpp" />
+    <ClCompile Include="system\simple_render_system.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="first_app.h" />
@@ -165,12 +166,15 @@
     <ClInclude Include="lve_utils.h" />
     <ClInclude Include="lve_window.h" />
     <ClInclude Include="lve_device.h" />
-    <ClInclude Include="Simple_render_system.h" />
+    <ClInclude Include="system\pointLight_render_system.h" />
+    <ClInclude Include="system\simple_render_system.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="compile.bat" />
     <None Include="shaders\myShader.frag" />
     <None Include="shaders\myShader.vert" />
+    <None Include="shaders\pointLight.frag" />
+    <None Include="shaders\pointLight.vert" />
     <None Include="shaders\simple_shader.frag" />
     <None Include="shaders\simple_shader.vert" />
   </ItemGroup>
