@@ -134,6 +134,7 @@ namespace lve {
 		configInfo.inputAssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
 		configInfo.inputAssemblyInfo.primitiveRestartEnable = VK_FALSE;
 
+
 	/*	configInfo.viewport.x = 0.0f;
 		configInfo.viewport.y = 0.0f;
 		configInfo.viewport.width = static_cast<float>(width);

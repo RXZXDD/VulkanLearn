@@ -22,8 +22,9 @@ namespace lve {
 		PointLightSystem(const PointLightSystem&) = delete;
 		PointLightSystem& operator=(const PointLightSystem&) = delete;
 
-		void render(FrameInfo& frameInfo);
-		
+		void render(FrameInfo& frameInfo, std::vector<LveGameObject>& gameObjects);
+		void update(FrameInfo& frameInfo, GlobalUbo& ubo, std::vector<LveGameObject>& gameObjects);
+
 	private:
 		//void loadModel();
 		void createPipelineLayout(VkDescriptorSetLayout globalSetLayout);

@@ -71,7 +71,7 @@ namespace lve {
 
 		for (auto& obj : gameObjects) {
 			
-
+			if (obj.model == nullptr) continue;
 
 			vkCmdBindDescriptorSets(
 				frameInfo.commandBuffer,
